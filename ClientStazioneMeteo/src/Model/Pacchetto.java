@@ -29,10 +29,30 @@ public class Pacchetto {
     }
     
     public DatagramPacket generaDatagram (InetAddress IP, Integer PORT){
-        //ByteBuffer buf = ByteBuffer.
-        return null;
+        byte buf[]= new byte[]  {   this.precipitazioni.byteValue(),
+                                    this.probabilitàPrecipitazioni.byteValue(),
+                                    this.umidita.byteValue(),
+                                    this.indiceUV.byteValue(),
+                                    this.temperatura.byteValue(),
+                                    this.velocitaVento.byteValue(),
+                                    this.pressione.byteValue(),
+                                    this.qualitaAria.byteValue()
+                                };
+        DatagramPacket pacchetto = new DatagramPacket(buf, buf.length, IP, PORT);
+        return pacchetto;
     }
     
-    
+    public byte[] generaByteArray(){
+        byte buf[]= new byte[]  {   this.precipitazioni.byteValue(),
+                                    this.probabilitàPrecipitazioni.byteValue(),
+                                    this.umidita.byteValue(),
+                                    this.indiceUV.byteValue(),
+                                    this.temperatura.byteValue(),
+                                    this.velocitaVento.byteValue(),
+                                    this.pressione.byteValue(),
+                                    this.qualitaAria.byteValue()
+                                };
+        return buf;
+    }
     
 }
