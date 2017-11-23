@@ -43,7 +43,7 @@ public class Pacchetto {
     }
     
     public byte[] generaByteArray(){
-        byte buf[] = new byte[]  {   this.precipitazioni.byteValue(),
+        byte buf[] = new byte[]  {  this.precipitazioni.byteValue(),
                                     this.probabilitàPrecipitazioni.byteValue(),
                                     this.umidita.byteValue(),
                                     this.indiceUV.byteValue(),
@@ -57,7 +57,15 @@ public class Pacchetto {
     
     public static Pacchetto pacchettoDaDatagram(DatagramPacket pacchetto){
         byte buf[] = pacchetto.getData();
-        return null;
-        
+        Pacchetto p = new Pacchetto(Double.parseDouble(Byte.toString(buf[0])),
+                                    Double.parseDouble(Byte.toString(buf[1])),
+                                    Double.parseDouble(Byte.toString(buf[2])),
+                                    Double.parseDouble(Byte.toString(buf[3])),
+                                    Double.parseDouble(Byte.toString(buf[4])),
+                                    Double.parseDouble(Byte.toString(buf[5])),
+                                    Double.parseDouble(Byte.toString(buf[6])),
+                                    Double.parseDouble(Byte.toString(buf[7])));
+        return p;
     }
+    
 }
