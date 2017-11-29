@@ -45,7 +45,9 @@ public class Server {
             Pacchetto p= Pacchetto.pacchettoDaDatagram(dp);
             arraypacchetto.add(p);
         }
-        }catch (SocketException e){}
+        }catch (SocketException e){
+            
+            //ELIA CRETINO
     }
     
 }
