@@ -30,8 +30,8 @@ public class StartupFrame extends javax.swing.JFrame {
      */
     public StartupFrame() {
         initComponents();
-        this.setLocationRelativeTo(null);
         this.pack();
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 

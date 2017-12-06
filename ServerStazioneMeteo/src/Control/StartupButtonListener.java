@@ -48,6 +48,7 @@ public class StartupButtonListener implements ActionListener{
         if(e.getSource()==this.sf.getjButton1()){
             this.UDP_PORT = Integer.parseInt(this.sf.getjTextField2().getText());
             this.TCP_PORT = Integer.parseInt(this.sf.getjTextField1().getText());
+            this.mf.setLocationRelativeTo(this.sf);
             this.sf.dispose();
             this.mf.setVisible(true);
         }

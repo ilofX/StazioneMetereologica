@@ -33,7 +33,6 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         super("Meteo Server");
         initComponents();
-        this.setLocationRelativeTo(null);
         this.pack();
         this.setVisible(false);
     }
