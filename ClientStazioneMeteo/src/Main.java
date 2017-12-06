@@ -1,5 +1,10 @@
 
 import Model.Pacchetto;
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
 
 /*
  * Copyright 2017 Alunno.
@@ -25,8 +30,12 @@ import Model.Pacchetto;
  */
 public class Main {
 
-    public static void main(String[] args) {
-    
+    public static void main(String[] args) throws SocketException, IOException {
+    Pacchetto p= new Pacchetto(2.0, 65.0, 78.0, 45.0, 45.2, 23.5, 26.0, 78.0);
+    DatagramSocket clientSocket = new DatagramSocket(); 
+    InetAddress IPAddress = InetAddress.getLocalHost();
+    DatagramPacket sendPacket = new DatagramPacket(p.generaByteArray(), p.generaByteArray().length, IPAddress, 9876); 
+    clientSocket.send(sendPacket);
     }
     
 }
