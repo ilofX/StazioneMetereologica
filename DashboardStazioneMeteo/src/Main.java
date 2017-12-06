@@ -1,4 +1,11 @@
 
+import Control.ListenerBottoniMainFrame;
+import Control.ListenerBottoniStartup;
+import Model.ChartsGenerator;
+import Model.DataManager;
+import Model.ParametersHolder;
+import View.MainFrame;
+import View.StartupFrame;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -33,13 +40,13 @@ public class Main {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            
-            
-            
-            
-            
-            
-            
+            StartupFrame sf = new StartupFrame();
+            MainFrame mf = new MainFrame();
+            DataManager dm = new DataManager();
+            ParametersHolder ph = new ParametersHolder();
+            ChartsGenerator cg = new ChartsGenerator(mf, dm);
+            ListenerBottoniStartup lbs = new ListenerBottoniStartup(mf, sf, ph);
+            ListenerBottoniMainFrame lbmf = new ListenerBottoniMainFrame(mf, cg, ph, dm);
         }
     }
     

@@ -33,9 +33,8 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         super("Meteo Server");
         initComponents();
-        this.setLocationRelativeTo(null);
         this.pack();
-        this.setVisible(true);
+        this.setVisible(false);
     }
 
     /**
@@ -72,6 +71,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel1.setForeground(new java.awt.Color(208, 208, 208));
 
         jScrollPane3.setBackground(new java.awt.Color(77, 77, 77));
+        jScrollPane3.setBorder(null);
 
         jList3.setBackground(new java.awt.Color(77, 77, 77));
         jList3.setForeground(new java.awt.Color(208, 208, 208));
@@ -79,6 +79,7 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jList3);
 
         jScrollPane4.setBackground(new java.awt.Color(77, 77, 77));
+        jScrollPane4.setBorder(null);
 
         jList4.setBackground(new java.awt.Color(77, 77, 77));
         jList4.setForeground(new java.awt.Color(208, 208, 208));

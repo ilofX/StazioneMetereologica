@@ -38,6 +38,7 @@ public class ServerTCP extends Thread{
     private final DataManager dm;
     private final Executor executors;
     private final JList clients;
+    private boolean interrupt=false;
 
     public ServerTCP(Integer PORT, DataManager dm, JList clients) {
         super("ServerTCP"); 
@@ -47,15 +48,26 @@ public class ServerTCP extends Thread{
         this.executors = Executors.newSingleThreadExecutor();
     }
 
+    public void terminate(){
+        try {
+            this.interrupt=true;
+            this.SocketTCP.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ServerTCP.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     @Override
     public void run() {
         try {
             this.SocketTCP=new ServerSocket(this.PORT);
-            while(!this.isInterrupted()){
+            while(!this.interrupt){
                 Socket s = this.SocketTCP.accept();
                 synchronized(this.clients){
-                    ((DefaultListModel)this.clients.getModel()).addElement(s.getRemoteSocketAddress());
+                    ((DefaultListModel)this.clients.getModel()).addElement(s.getRemoteSocketAddress().toString());
                 }
+                this.clients.revalidate();
+                this.clients.repaint();
                 this.executors.execute(new HandleTCPRequest(s, this.dm, this.clients));
             }
             this.SocketTCP.close();

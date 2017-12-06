@@ -49,10 +49,10 @@ public class HandleTCPRequest implements Runnable{
         try {
             DataInputStream in = new DataInputStream(new BufferedInputStream(this.s.getInputStream()));
             DataOutputStream out = new DataOutputStream(new BufferedOutputStream(this.s.getOutputStream()));
-            byte[] data = new byte[4096];
+            byte[] data = new byte[10000];
             in.read(data);
             String received = new String(data);
-            if(received.equals("Dati?")){
+            if(received.startsWith("Dati?")){
                 byte[] dati = this.dm.generaArrayDati();
                 out.write(dati);
                 out.flush();
@@ -60,12 +60,18 @@ public class HandleTCPRequest implements Runnable{
             in.close();
             out.close();
             this.s.close();
-            synchronized(this.clients){
-                ((DefaultListModel)this.clients.getModel()).removeElement(this.s.getRemoteSocketAddress());
-            }
+            Thread.sleep(500);
         } catch (IOException ex) {
             Logger.getLogger(HandleTCPRequest.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        } catch (InterruptedException ex) {
+            Logger.getLogger(HandleTCPRequest.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            synchronized(this.clients){
+                ((DefaultListModel)this.clients.getModel()).removeElement(this.s.getRemoteSocketAddress().toString());
+            }
+            this.clients.revalidate();
+            this.clients.repaint();
+        }
     }
     
 }

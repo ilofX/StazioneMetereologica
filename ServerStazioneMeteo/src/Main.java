@@ -1,7 +1,9 @@
 
 import Control.MainFrameButtonListener;
+import Control.StartupButtonListener;
 import Model.DataManager;
 import View.MainFrame;
+import View.StartupFrame;
 
 /*
  * Copyright 2017 Filippo Stella.
@@ -29,7 +31,9 @@ public class Main {
     public static void main(String[] args) {
         DataManager dm = new DataManager();
         MainFrame mf = new MainFrame();
-        MainFrameButtonListener mfbl = new MainFrameButtonListener(mf, dm);     
+        StartupFrame sf = new StartupFrame();
+        StartupButtonListener sbl = new StartupButtonListener(sf, mf);
+        MainFrameButtonListener mfbl = new MainFrameButtonListener(mf, dm, sbl);     
     }
     
 }

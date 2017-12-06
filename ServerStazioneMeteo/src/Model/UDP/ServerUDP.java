@@ -39,6 +39,7 @@ public class ServerUDP extends Thread{
     private final Integer PORT;
     private final DataManager dm;
     private final JList clients;
+    private boolean interrupt = false;
 
     public ServerUDP(Integer PORT, DataManager dm, JList clients) {
         super("ServerUDP");
@@ -47,18 +48,25 @@ public class ServerUDP extends Thread{
         this.clients = clients;
         this.executors = Executors.newSingleThreadExecutor();
     }
+    
+    public void terminate(){
+        this.interrupt=true;
+        this.SocketUDP.close();
+    }
 
     @Override
     public void run() {
         try {
             this.SocketUDP = new DatagramSocket(this.PORT);
-            while(!this.isInterrupted()){
-                byte buf[] = new byte[4096];
+            while(!this.interrupt){
+                byte buf[] = new byte[10000];
                 DatagramPacket p = new DatagramPacket(buf, buf.length);
                 this.SocketUDP.receive(p);
                 synchronized(this.clients){
-                    ((DefaultListModel)this.clients.getModel()).addElement(p.getSocketAddress());
+                    ((DefaultListModel)this.clients.getModel()).addElement(p.getSocketAddress().toString());
                 }
+                this.clients.revalidate();
+                this.clients.repaint();
                 this.executors.execute(new HandleUDPPacket(p, this.dm, this.clients));
             }
             this.SocketUDP.close();

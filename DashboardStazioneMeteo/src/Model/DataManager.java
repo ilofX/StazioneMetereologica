@@ -26,6 +26,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+
+
 /**
  *
  * @author Stella Filippo
@@ -37,98 +39,117 @@ public class DataManager {
 
     public DataManager() {
         data = new HashMap<>();
+        System.out.println(data.toString());
     }
     
     public void setData(Map<Calendar,Pacchetto> data){
         this.data = data; 
+        System.out.println(this.printData());
     }
     
     public DefaultCategoryDataset getTemperatura(){
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        Iterator<Calendar> i = data.keySet().iterator();
-        while(i.hasNext()){
-            Calendar d = i.next();
-            Pacchetto p = this.data.get(d);
-            dataset.addValue(p.getTemperatura(), "temperature", d.getTime().toString());
+        synchronized (this){
+            Iterator<Calendar> i = data.keySet().iterator();
+            while(i.hasNext()){
+                Calendar d = i.next();
+                Pacchetto p = this.data.get(d);
+                dataset.addValue(p.getTemperatura(), "temperature", d.getTime().toString());
+            }
         }
         return dataset;
     }
     
     public DefaultCategoryDataset getPrecipitazioni(){
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        Iterator<Calendar> i = data.keySet().iterator();
-        while(i.hasNext()){
-            Calendar d = i.next();
-            Pacchetto p = this.data.get(d);
-            dataset.addValue(p.getPrecipitazioni(), "precipitazioni", d.getTime().toString());
-        }
-        return dataset;
-    }
-    
-    public DefaultCategoryDataset getProbabilitàPrecipitazioni(){
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        Iterator<Calendar> i = data.keySet().iterator();
-        while(i.hasNext()){
-            Calendar d = i.next();
-            Pacchetto p = this.data.get(d);
-            dataset.addValue(p.getProbabilitàPrecipitazioni(), "probabilita", d.getTime().toString());
+        synchronized (this){
+            Iterator<Calendar> i = data.keySet().iterator();
+            while(i.hasNext()){
+                Calendar d = i.next();
+                Pacchetto p = this.data.get(d);
+                dataset.addValue(p.getPrecipitazioni(), "precipitazioni", d.getTime().toString());
+                dataset.addValue(p.getProbabilitàPrecipitazioni(), "probabilitaprecipitazioni", d.getTime().toString());
+            }
         }
         return dataset;
     }
     
     public DefaultCategoryDataset getUmidità(){
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        Iterator<Calendar> i = data.keySet().iterator();
-        while(i.hasNext()){
-            Calendar d = i.next();
-            Pacchetto p = this.data.get(d);
-            dataset.addValue(p.getUmidita(), "umidità", d.getTime().toString());
+        synchronized (this){
+            Iterator<Calendar> i = data.keySet().iterator();
+            while(i.hasNext()){
+                Calendar d = i.next();
+                Pacchetto p = this.data.get(d);
+                dataset.addValue(p.getUmidita(), "umidità", d.getTime().toString());
+            }
         }
         return dataset;
     }
     
     public DefaultCategoryDataset getIndiceUV(){
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        Iterator<Calendar> i = data.keySet().iterator();
-        while(i.hasNext()){
-            Calendar d = i.next();
-            Pacchetto p = this.data.get(d);
-            dataset.addValue(p.getIndiceUV(), "indiceuv", d.getTime().toString());
+        synchronized (this){
+            Iterator<Calendar> i = data.keySet().iterator();
+            while(i.hasNext()){
+                Calendar d = i.next();
+                Pacchetto p = this.data.get(d);
+                dataset.addValue(p.getIndiceUV(), "indiceuv", d.getTime().toString());
+            }
         }
         return dataset;
     }
     
     public DefaultCategoryDataset getVelocitaVento(){
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        Iterator<Calendar> i = data.keySet().iterator();
-        while(i.hasNext()){
-            Calendar d = i.next();
-            Pacchetto p = this.data.get(d);
-            dataset.addValue(p.getVelocitaVento(), "vento", d.getTime().toString());
+        synchronized (this){
+            Iterator<Calendar> i = data.keySet().iterator();
+            while(i.hasNext()){
+                Calendar d = i.next();
+                Pacchetto p = this.data.get(d);
+                dataset.addValue(p.getVelocitaVento(), "vento", d.getTime().toString());
+            }
         }
         return dataset;
     }
     
     public DefaultCategoryDataset getPressione(){
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        Iterator<Calendar> i = data.keySet().iterator();
-        while(i.hasNext()){
-            Calendar d = i.next();
-            Pacchetto p = this.data.get(d);
-            dataset.addValue(p.getPressione(), "pressione", d.getTime().toString());
+        synchronized (this){
+            Iterator<Calendar> i = data.keySet().iterator();
+            while(i.hasNext()){
+                Calendar d = i.next();
+                Pacchetto p = this.data.get(d);
+                dataset.addValue(p.getPressione(), "pressione", d.getTime().toString());
+            }
         }
         return dataset;
     }
     
     public DefaultCategoryDataset getQualitaAria(){
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        Iterator<Calendar> i = data.keySet().iterator();
-        while(i.hasNext()){
-            Calendar d = i.next();
-            Pacchetto p = this.data.get(d);
-            dataset.addValue(p.getQualitaAria(), "qualitaaria", d.getTime().toString());
+        synchronized (this){
+            Iterator<Calendar> i = data.keySet().iterator();
+            while(i.hasNext()){
+                Calendar d = i.next();
+                Pacchetto p = this.data.get(d);
+                dataset.addValue(p.getQualitaAria(), "qualitaaria", d.getTime().toString());
+            }
         }
         return dataset;
+    }
+    
+    public String printData(){
+        String ris = "";
+        synchronized (this){
+            Iterator<Calendar> i = data.keySet().iterator();
+            while(i.hasNext()){
+                Calendar d = i.next();
+                Pacchetto p = this.data.get(d);
+                ris+=p.toString();
+            }
+        }
+        return ris;
     }
     
     public static Map<Calendar, Pacchetto> estraiMappa(byte[] dati){
@@ -141,10 +162,11 @@ public class DataManager {
             return ris;
         } catch (IOException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
+            return new HashMap<>();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);    
         }
-        return null;
+        return new HashMap<>();
     }
     
 }

@@ -15,7 +15,6 @@
  */
 package Control;
 
-import Model.ParametersHolder;
 import View.MainFrame;
 import View.StartupFrame;
 import java.awt.event.ActionEvent;
@@ -24,33 +23,36 @@ import java.awt.event.ActionListener;
 /**
  *
  * @author Stella Filippo
- * @version 0.01
  */
-public class ListenerBottoniStartup implements ActionListener{
+public class StartupButtonListener implements ActionListener{
 
     private final StartupFrame sf;
-    private final ParametersHolder ph;
     private final MainFrame mf;
+    private Integer UDP_PORT, TCP_PORT;
 
-    public ListenerBottoniStartup(MainFrame mf, StartupFrame sf, ParametersHolder ph) {
+    public StartupButtonListener(StartupFrame sf, MainFrame mf) {
         this.sf = sf;
-        this.ph = ph;
         this.mf = mf;
-        this.sf.setListenerBottoni(this);
+        this.sf.setButtonListener(this);
+    }
+    
+    public Integer getUDP_PORT() {
+        return UDP_PORT;
+    }
+    public Integer getTCP_PORT() {
+        return TCP_PORT;
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==this.sf.getjButton1()){
-            //CONTINUA
-            this.ph.setADDRESS(this.sf.getjTextField1().getText());
-            this.ph.setPORT(Integer.parseInt(this.sf.getjTextField2().getText()));
+            this.UDP_PORT = Integer.parseInt(this.sf.getjTextField2().getText());
+            this.TCP_PORT = Integer.parseInt(this.sf.getjTextField1().getText());
             this.mf.setLocationRelativeTo(this.sf);
             this.sf.dispose();
             this.mf.setVisible(true);
         }
         else if(e.getSource()==this.sf.getjButton2()){
-            //ANNULLA
             System.exit(0);
         }
     }

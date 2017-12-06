@@ -18,6 +18,8 @@ package Model.UDP;
 import Model.DataManager;
 import Model.Pacchetto;
 import java.net.DatagramPacket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
@@ -40,9 +42,17 @@ public class HandleUDPPacket implements Runnable {
    
     @Override
     public void run() {
-        this.m.AggiungiDato(Pacchetto.pacchettoDaDatagram(p));
-        synchronized(this.clients){
-            ((DefaultListModel)this.clients.getModel()).removeElement(p.getSocketAddress());
+        try {
+            this.m.AggiungiDato(Pacchetto.pacchettoDaDatagram(p));
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(HandleUDPPacket.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            synchronized(this.clients){
+                ((DefaultListModel)this.clients.getModel()).removeElement(p.getSocketAddress().toString());
+            }   
+            this.clients.revalidate();
+            this.clients.repaint();
         }
     }
     
