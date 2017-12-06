@@ -1,12 +1,5 @@
-
-import Control.MainFrameButtonListener;
-import Control.StartupButtonListener;
-import Model.DataManager;
-import View.MainFrame;
-import View.StartupFrame;
-
 /*
- * Copyright 2017 Filippo Stella.
+ * Copyright 2017 Filippo Stella, Elia Nasato, Lorenzo Zorzini, Cecconato Filippo.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +13,12 @@ import View.StartupFrame;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import Control.MainFrameButtonListener;
+import Control.StartupButtonListener;
+import Model.DataManager;
+import View.MainFrame;
+import View.StartupFrame;
 
 /**
  *
