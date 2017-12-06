@@ -29,19 +29,22 @@ import java.awt.event.ActionListener;
 public class MainFrameButtonListener implements ActionListener{
 
     private final MainFrame mf;
-    private final ServerTCP serverTCP;
-    private final ServerUDP serverUDP;
+    private ServerTCP serverTCP;
+    private ServerUDP serverUDP;
+    private final DataManager dm;
+    private final StartupButtonListener sbl;
 
-    public MainFrameButtonListener(MainFrame mf, DataManager dm) {
+    public MainFrameButtonListener(MainFrame mf, DataManager dm, StartupButtonListener sbl) {
         this.mf = mf;
-        this.serverTCP = new ServerTCP(6969, dm, this.mf.getjList4());
-        this.serverUDP = new ServerUDP(6970, dm, this.mf.getjList3());
+        this.dm = dm;
+        this.sbl = sbl;
         this.mf.setListenerBottoni(this);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==this.mf.getjButton5()){
             //Start UDP
+            this.serverUDP = new ServerUDP(this.sbl.getUDP_PORT(), this.dm, this.mf.getjList3());
             this.mf.getjButton5().setEnabled(false);
             this.serverUDP.start();
             this.mf.getjProgressBar3().setIndeterminate(true);
@@ -49,6 +52,7 @@ public class MainFrameButtonListener implements ActionListener{
         }
         else if(e.getSource()==this.mf.getjButton6()){
             //Start TCP
+            this.serverTCP = new ServerTCP(this.sbl.getTCP_PORT(), this.dm, this.mf.getjList4());
             this.mf.getjButton6().setEnabled(false);
             this.serverTCP.start();
             this.mf.getjProgressBar4().setIndeterminate(true);
