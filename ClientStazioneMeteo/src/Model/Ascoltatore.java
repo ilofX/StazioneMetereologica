@@ -37,16 +37,15 @@ public class Ascoltatore implements ActionListener{
     public Ascoltatore(FinetraClient f) throws SocketException{
         this.f=f;
         f.AggiungiAscoltatore(this);
-         //sclientSocket = new DatagramSocket(); 
+         clientSocket = new DatagramSocket(); 
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==f.getBtnAggiorna()){
-            
-           //Double.parseDouble((String) f.getVelocita_vento().getValue())
+
             Pacchetto p= new Pacchetto(2.0, 65.0, 78.0, 45.0, 45.2, 23.5, 26.0, 78.0);
-           p=new Pacchetto(Double.parseDouble((String) f.getPrecipitazionemillimetri().getValue()), Double.parseDouble((String) f.getProbabilita_precipitazioni().getValue()), Double.parseDouble((String) f.getUmidita().getValue()), Double.parseDouble((String) f.getIndiceUV().getValue()), Double.parseDouble((String) f.getTemperatura().getValue()),(Double)(f.getVelocita_vento().getValue()),(Double)(f.getPressione().getValue()), Double.parseDouble((String) f.getVelocita_vento().getValue()) );
+           p=new Pacchetto(Double.parseDouble(f.getVelocita_vento().getValue().toString()), f.getProbabilita_precipitazioni().getValue()+0.0, f.getUmidita().getValue()+0.0, Double.parseDouble(f.getIndiceUV().getValue().toString()), Double.parseDouble(f.getTemperatura().getValue().toString()), Double.parseDouble(f.getVelocita_vento().getValue().toString()), Double.parseDouble(f.getPressione().getValue().toString()), Double.parseDouble(f.getVelocita_vento().getValue().toString()) );
             InetAddress IPAddress;
             try {
                 IPAddress = InetAddress.getLocalHost();
