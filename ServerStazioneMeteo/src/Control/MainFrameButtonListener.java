@@ -61,14 +61,14 @@ public class MainFrameButtonListener implements ActionListener{
         else if(e.getSource()==this.mf.getjButton7()){
             //Stop UDP
             this.mf.getjButton7().setEnabled(false);
-            this.serverUDP.interrupt();
+            this.serverUDP.terminate();
             this.mf.getjProgressBar3().setIndeterminate(false);
             this.mf.getjButton5().setEnabled(true);
         }
         else if(e.getSource()==this.mf.getjButton8()){
             //Stop TCP
             this.mf.getjButton8().setEnabled(false);
-            this.serverTCP.interrupt();
+            this.serverTCP.terminate();
             this.mf.getjProgressBar4().setIndeterminate(false);
             this.mf.getjButton6().setEnabled(true);
         }
