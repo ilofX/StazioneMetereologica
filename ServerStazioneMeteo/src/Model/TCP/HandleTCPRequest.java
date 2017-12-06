@@ -55,6 +55,7 @@ public class HandleTCPRequest implements Runnable{
             if(received.equals("Dati?")){
                 byte[] dati = this.dm.generaArrayDati();
                 out.write(dati);
+                out.flush();
             }
             in.close();
             out.close();

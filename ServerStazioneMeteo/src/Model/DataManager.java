@@ -19,7 +19,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,15 +32,15 @@ import java.util.logging.Logger;
  */
 public class DataManager {
     
-    private final ArrayList<Pacchetto> data;
+    private final Map<Calendar,Pacchetto> data;
 
     public DataManager() {
-        data = new ArrayList<>();
+        data = new HashMap<>();
     }
     
     public void AggiungiDato(Pacchetto p){
         synchronized (this.data){
-            this.data.add(p);
+            this.data.put(Calendar.getInstance(),p);
         }
     }
     
