@@ -70,4 +70,24 @@
     nbproject/build-impl.xml file. 
 
     -->
+    
+    <target name="-post-jar">      <!-- Tell ANT we're creating a new build artifact, after the main jar file is built. -->
+        <jar jarfile="DashboardStazioneMeteo_Packed.jar">      <!-- Tell ANT to build new jar file with specified name. -->
+            <zipfileset src="${dist.jar}" excludes="META-INF/*" /> <!-- Add everything from main jar file except the manifest into the new jar file. -->
+            <zipfileset src="lib/hamcrest-core-1.3.jar" excludes="META-INF/*" /> <!-- Also add everything from this dependency in the blib folder except its manifest file into the new jar file. (Do this for every dependency) -->
+            <zipfileset src="lib/jcommon-1.0.23.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/jfreechart-1.0.19-experimental.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/jfreechart-1.0.19-swt.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/jfreechart-1.0.19.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/jfreesvg-2.0.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/junit-4.11.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/orsoncharts-1.4-eval-nofx.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/orsonpdf-1.6-eval.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/servlet.jar" excludes="META-INF/*" />
+            <zipfileset src="lib/swtgraphics2d.jar" excludes="META-INF/*" />
+            <manifest>  <!-- Create a new manifest file for this new jar file. -->
+                <attribute name="Main-Class" value="Main" />  <!-- Set the main class to specified class if there is one. -->
+            </manifest>      <!-- Obligatory closing line -->
+        </jar>               <!-- ditto -->
+    </target>                <!-- No f***ing autocorrect I did not mean dildo -->
 </project>
