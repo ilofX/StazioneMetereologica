@@ -26,8 +26,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-
-
 /**
  *
  * @author Stella Filippo
@@ -157,7 +155,7 @@ public class DataManager {
             Map ris;
             ByteArrayInputStream inByte = new ByteArrayInputStream(dati);
             ObjectInputStream inObject  = new ObjectInputStream(inByte);
-            ris = (HashMap<Calendar, Pacchetto>) inObject.readObject();
+            ris = (HashMap<Calendar,Pacchetto>) inObject.readObject();
             inByte.close();
             return ris;
         } catch (IOException ex) {
