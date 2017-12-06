@@ -12,7 +12,7 @@ import java.net.InetAddress;
 /**
  *
  * @author Filippo Stella
- * @version 0.01
+ * @version 0.05
  */
 public class Pacchetto implements Serializable{
     

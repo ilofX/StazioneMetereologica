@@ -7,6 +7,8 @@ package Model;
 
 import View.MainFrame;
 import java.awt.Dimension;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -29,15 +31,21 @@ public class ChartsGenerator {
     }
     
     public void refreshCharts(){
-        this.mf.getjTabbedPane1().removeAll();
-        this.generatePrecipitazioni();
-        this.generateUmidità();
-        this.generateIndiceUV();
-        this.generateTemperatura();
-        this.generateVento();
-        this.generatePressione();
-        this.generateQualitaAria();
-        this.mf.getjButton1().setEnabled(true);
+        try {
+            this.mf.getjTabbedPane1().removeAll();
+            Thread.sleep(500);
+            this.generatePrecipitazioni();
+            this.generateUmidità();
+            this.generateIndiceUV();
+            this.generateTemperatura();
+            this.generateVento();
+            this.generatePressione();
+            this.generateQualitaAria();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ChartsGenerator.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            this.mf.getjButton1().setEnabled(true);
+        }
     }
     
     public void generatePrecipitazioni(){
