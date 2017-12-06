@@ -61,10 +61,12 @@ public class DataManager {
             Calendar d = i.next();
             Pacchetto p = this.data.get(d);
             dataset.addValue(p.getPrecipitazioni(), "precipitazioni", d.getTime().toString());
+            dataset.addValue(p.getProbabilitàPrecipitazioni(), "probabilitaprecipitazioni", d.getTime().toString());
         }
         return dataset;
     }
     
+    /*
     public DefaultCategoryDataset getProbabilitàPrecipitazioni(){
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         Iterator<Calendar> i = data.keySet().iterator();
@@ -75,6 +77,7 @@ public class DataManager {
         }
         return dataset;
     }
+    */
     
     public DefaultCategoryDataset getUmidità(){
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();

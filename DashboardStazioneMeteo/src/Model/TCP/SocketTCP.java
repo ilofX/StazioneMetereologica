@@ -49,15 +49,17 @@ public class SocketTCP extends Thread{
     @Override
     public void run() {
         try {
-            this.s = new Socket(this.ADDRESS, this.PORT);
-            DataInputStream in = new DataInputStream(new BufferedInputStream(this.s.getInputStream()));
-            DataOutputStream out = new DataOutputStream(new BufferedOutputStream(this.s.getOutputStream()));
-            out.write("Dati?".getBytes());
-            out.flush();
-            byte[] data = new byte[4096];
-            in.read(data);
-            Map<Calendar, Pacchetto> map = DataManager.estraiMappa(data);
-            this.dm.setData(map);
+                this.s = new Socket(this.ADDRESS, this.PORT);
+                DataInputStream in = new DataInputStream(new BufferedInputStream(this.s.getInputStream()));
+                DataOutputStream out = new DataOutputStream(new BufferedOutputStream(this.s.getOutputStream()));
+                out.write("Dati?".getBytes());
+                out.flush();
+                byte[] data = new byte[4096];
+                in.read(data);
+                Map<Calendar, Pacchetto> map = DataManager.estraiMappa(data);
+            synchronized (this.dm){
+                this.dm.setData(map);
+            }
         } catch (IOException ex) {
             Logger.getLogger(SocketTCP.class.getName()).log(Level.SEVERE, null, ex);
         }
