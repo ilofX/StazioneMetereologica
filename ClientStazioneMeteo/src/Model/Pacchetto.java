@@ -68,4 +68,17 @@ public class Pacchetto {
         return p;
     }
     
+    public static Pacchetto pacchettoDaByteArray(byte data[]){
+        Pacchetto p = new Pacchetto(Double.parseDouble(Byte.toString(data[0])),
+                                    Double.parseDouble(Byte.toString(data[1])),
+                                    Double.parseDouble(Byte.toString(data[2])),
+                                    Double.parseDouble(Byte.toString(data[3])),
+                                    Double.parseDouble(Byte.toString(data[4])),
+                                    Double.parseDouble(Byte.toString(data[5])),
+                                    Double.parseDouble(Byte.toString(data[6])),
+                                    Double.parseDouble(Byte.toString(data[7])));
+            
+        return p;
+    }
+    
 }
