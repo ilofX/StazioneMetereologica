@@ -63,8 +63,10 @@ public class ServerUDP extends Thread{
                 DatagramPacket p = new DatagramPacket(buf, buf.length);
                 this.SocketUDP.receive(p);
                 synchronized(this.clients){
-                    ((DefaultListModel)this.clients.getModel()).addElement(p.getSocketAddress());
+                    ((DefaultListModel)this.clients.getModel()).addElement(p.getSocketAddress().toString());
                 }
+                this.clients.revalidate();
+                this.clients.repaint();
                 this.executors.execute(new HandleUDPPacket(p, this.dm, this.clients));
             }
             this.SocketUDP.close();

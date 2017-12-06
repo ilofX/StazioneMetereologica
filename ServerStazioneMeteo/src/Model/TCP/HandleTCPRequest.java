@@ -60,12 +60,18 @@ public class HandleTCPRequest implements Runnable{
             in.close();
             out.close();
             this.s.close();
-            synchronized(this.clients){
-                ((DefaultListModel)this.clients.getModel()).removeElement(this.s.getRemoteSocketAddress());
-            }
+            Thread.sleep(500);
         } catch (IOException ex) {
             Logger.getLogger(HandleTCPRequest.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        } catch (InterruptedException ex) {
+            Logger.getLogger(HandleTCPRequest.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            synchronized(this.clients){
+                ((DefaultListModel)this.clients.getModel()).removeElement(this.s.getRemoteSocketAddress().toString());
+            }
+            this.clients.revalidate();
+            this.clients.repaint();
+        }
     }
     
 }

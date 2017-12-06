@@ -64,8 +64,10 @@ public class ServerTCP extends Thread{
             while(!this.interrupt){
                 Socket s = this.SocketTCP.accept();
                 synchronized(this.clients){
-                    ((DefaultListModel)this.clients.getModel()).addElement(s.getRemoteSocketAddress());
+                    ((DefaultListModel)this.clients.getModel()).addElement(s.getRemoteSocketAddress().toString());
                 }
+                this.clients.revalidate();
+                this.clients.repaint();
                 this.executors.execute(new HandleTCPRequest(s, this.dm, this.clients));
             }
             this.SocketTCP.close();
