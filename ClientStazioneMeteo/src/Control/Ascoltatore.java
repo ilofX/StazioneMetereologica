@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 Elia.
+ * Copyright 2017 Filippo Stella, Elia Nasato, Lorenzo Zorzini, Cecconato Filippo.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,8 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package Model;
+package Control;
 
+import Model.Pacchetto;
+import View.FinetraClient;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -22,13 +24,13 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  *
- * @author Elia
+ * @author Elia Nasato
+ * @version 0.01
  */
 public class Ascoltatore implements ActionListener{
     
@@ -37,26 +39,21 @@ public class Ascoltatore implements ActionListener{
     public Ascoltatore(FinetraClient f) throws SocketException{
         this.f=f;
         f.AggiungiAscoltatore(this);
-         clientSocket = new DatagramSocket(); 
+        clientSocket = new DatagramSocket(); 
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==f.getBtnAggiorna()){
 
-            Pacchetto p= new Pacchetto(2.0, 65.0, 78.0, 45.0, 45.2, 23.5, 26.0, 78.0);
-           p=new Pacchetto(Double.parseDouble(f.getVelocita_vento().getValue().toString()), f.getProbabilita_precipitazioni().getValue()+0.0, f.getUmidita().getValue()+0.0, Double.parseDouble(f.getIndiceUV().getValue().toString()), Double.parseDouble(f.getTemperatura().getValue().toString()), Double.parseDouble(f.getVelocita_vento().getValue().toString()), Double.parseDouble(f.getPressione().getValue().toString()), Double.parseDouble(f.getVelocita_vento().getValue().toString()) );
-            InetAddress IPAddress;
+            Pacchetto p=new Pacchetto(Double.parseDouble(f.getVelocita_vento().getValue().toString()), f.getProbabilita_precipitazioni().getValue()+0.0, f.getUmidita().getValue()+0.0, Double.parseDouble(f.getIndiceUV().getValue().toString()), Double.parseDouble(f.getTemperatura().getValue().toString()), Double.parseDouble(f.getVelocita_vento().getValue().toString()), Double.parseDouble(f.getPressione().getValue().toString()), Double.parseDouble(f.getVelocita_vento().getValue().toString()) );
             try {
-                IPAddress = InetAddress.getLocalHost();
-            p.generaDatagram(IPAddress, 6970);
-            DatagramPacket sendPacket = new DatagramPacket(p.generaByteArray(), p.generaByteArray().length, IPAddress, 9876); 
+                p.generaDatagram(InetAddress.getByName(this.f.getjTextField1().getText()), Integer.parseInt(this.f.getjTextField2().getText()));
+                DatagramPacket sendPacket = new DatagramPacket(p.generaByteArray(), p.generaByteArray().length, InetAddress.getByName(this.f.getjTextField1().getText()), Integer.parseInt(this.f.getjTextField2().getText())); 
                 clientSocket.send(sendPacket);
             } catch (IOException ex) {
                 Logger.getLogger(Ascoltatore.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            
         }
         
     }

@@ -1,15 +1,15 @@
 
-import Model.Ascoltatore;
-import Model.FinetraClient;
-import Model.Pacchetto;
+import Control.Ascoltatore;
+import View.FinetraClient;
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
 import java.net.SocketException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /*
- * Copyright 2017 Alunno.
+ * Copyright 2017 Filippo Stella, Elia Nasato, Lorenzo Zorzini, Cecconato Filippo.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,23 +27,20 @@ import java.net.SocketException;
 
 /**
  *
- * @author Filippo Stella
+ * @author Elia Nasato
  * @version 0.01
  */
 public class Main {
 
     public static void main(String[] args) throws SocketException, IOException {
-        FinetraClient f = new FinetraClient();
-        Ascoltatore a = new Ascoltatore(f);
-        f.setVisible(true);
-        /*
-    Pacchetto p= new Pacchetto(2.0, 65.0, 78.0, 45.0, 45.2, 23.5, 26.0, 78.0);
-    DatagramSocket clientSocket = new DatagramSocket(); 
-    InetAddress IPAddress = InetAddress.getLocalHost();
-    p.generaDatagram(IPAddress, 6970);
-    DatagramPacket sendPacket = new DatagramPacket(p.generaByteArray(), p.generaByteArray().length, IPAddress, 9876); 
-    clientSocket.send(sendPacket);
-*/
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            FinetraClient f = new FinetraClient();
+            Ascoltatore a = new Ascoltatore(f);
+        }
     }
     
 }
