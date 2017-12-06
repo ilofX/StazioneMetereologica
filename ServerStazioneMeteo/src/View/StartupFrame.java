@@ -29,6 +29,7 @@ public class StartupFrame extends javax.swing.JFrame {
      * Creates new form StartupFrame
      */
     public StartupFrame() {
+        super("Impostazione Parametri");
         initComponents();
         this.pack();
         this.setLocationRelativeTo(null);
