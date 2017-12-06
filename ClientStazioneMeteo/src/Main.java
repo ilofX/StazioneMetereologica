@@ -1,13 +1,3 @@
-
-import Control.Ascoltatore;
-import View.FinetraClient;
-import java.io.IOException;
-import java.net.SocketException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
 /*
  * Copyright 2017 Filippo Stella, Elia Nasato, Lorenzo Zorzini, Cecconato Filippo.
  *
@@ -24,6 +14,14 @@ import javax.swing.UnsupportedLookAndFeelException;
  * limitations under the License.
  */
 
+import Control.Ascoltatore;
+import View.FinetraClient;
+import java.io.IOException;
+import java.net.SocketException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
