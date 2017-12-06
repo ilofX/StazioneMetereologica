@@ -24,8 +24,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -52,14 +50,9 @@ public class ListenerBottoniMainFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==this.mf.getjButton1()){
-            try {
-                this.mf.getjButton1().setEnabled(false);
-                this.executors.execute(new SocketTCP(this.ph.getADDRESS(), this.ph.getPORT(), this.dm));
-                Thread.sleep(500);
-                this.cg.refreshCharts();
-            } catch (InterruptedException ex) {
-                Logger.getLogger(ListenerBottoniMainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            this.mf.getjButton1().setEnabled(false);
+            this.executors.execute(new SocketTCP(this.ph.getADDRESS(), this.ph.getPORT(), this.dm));
+            this.cg.refreshCharts();
         }
     }
     
