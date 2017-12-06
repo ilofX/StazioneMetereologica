@@ -42,7 +42,7 @@ public class HandleUDPPacket implements Runnable {
     public void run() {
         this.m.AggiungiDato(Pacchetto.pacchettoDaDatagram(p));
         synchronized(this.clients){
-                    ((DefaultListModel)this.clients.getModel()).removeElement(p.getSocketAddress());
+            ((DefaultListModel)this.clients.getModel()).removeElement(p.getSocketAddress());
         }
     }
     
