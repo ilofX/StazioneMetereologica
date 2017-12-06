@@ -29,7 +29,6 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         super("Meteo Dashboard"); 
         initComponents();
-        this.setLocationRelativeTo(null);
         this.pack();
         this.setVisible(false);
     }

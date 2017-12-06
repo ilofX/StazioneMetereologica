@@ -32,8 +32,8 @@ public class StartupFrame extends javax.swing.JFrame {
     public StartupFrame() {
         super("Impostazione Parametri");
         initComponents();
-        this.setLocationRelativeTo(null);
         this.pack();
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 

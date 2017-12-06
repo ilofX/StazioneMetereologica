@@ -45,6 +45,7 @@ public class ListenerBottoniStartup implements ActionListener{
             //CONTINUA
             this.ph.setADDRESS(this.sf.getjTextField1().getText());
             this.ph.setPORT(Integer.parseInt(this.sf.getjTextField2().getText()));
+            this.mf.setLocationRelativeTo(this.sf);
             this.sf.dispose();
             this.mf.setVisible(true);
         }
