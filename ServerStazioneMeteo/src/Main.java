@@ -1,5 +1,10 @@
+
+import Control.MainFrameButtonListener;
+import Model.DataManager;
+import View.MainFrame;
+
 /*
- * Copyright 2017 Filippo.
+ * Copyright 2017 Filippo Stella.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +21,15 @@
 
 /**
  *
- * @author Filippo
+ * @author Filippo Stella
+ * @version 0.01
  */
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        DataManager dm = new DataManager();
+        MainFrame mf = new MainFrame();
+        MainFrameButtonListener mfbl = new MainFrameButtonListener(mf, dm);     
     }
     
 }
