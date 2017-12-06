@@ -1,18 +1,5 @@
-
-import Control.ListenerBottoniMainFrame;
-import Control.ListenerBottoniStartup;
-import Model.ChartsGenerator;
-import Model.DataManager;
-import Model.ParametersHolder;
-import View.MainFrame;
-import View.StartupFrame;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
 /*
- * Copyright 2017 Stella Filippo.
+ * Copyright 2017 Filippo Stella, Elia Nasato, Lorenzo Zorzini, Cecconato Filippo.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +13,18 @@ import javax.swing.UnsupportedLookAndFeelException;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import Control.ListenerBottoniMainFrame;
+import Control.ListenerBottoniStartup;
+import Model.ChartsGenerator;
+import Model.DataManager;
+import Model.ParametersHolder;
+import View.MainFrame;
+import View.StartupFrame;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
