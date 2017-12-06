@@ -39,10 +39,12 @@ public class DataManager {
 
     public DataManager() {
         data = new HashMap<>();
+        System.out.println(data.toString());
     }
     
     public void setData(Map<Calendar,Pacchetto> data){
         this.data = data; 
+        System.out.println(this.printData());
     }
     
     public DefaultCategoryDataset getTemperatura(){
@@ -71,19 +73,6 @@ public class DataManager {
         }
         return dataset;
     }
-    
-    /*
-    public DefaultCategoryDataset getProbabilitàPrecipitazioni(){
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        Iterator<Calendar> i = data.keySet().iterator();
-        while(i.hasNext()){
-            Calendar d = i.next();
-            Pacchetto p = this.data.get(d);
-            dataset.addValue(p.getProbabilitàPrecipitazioni(), "probabilita", d.getTime().toString());
-        }
-        return dataset;
-    }
-    */
     
     public DefaultCategoryDataset getUmidità(){
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -150,6 +139,19 @@ public class DataManager {
         return dataset;
     }
     
+    public String printData(){
+        String ris = "";
+        synchronized (this){
+            Iterator<Calendar> i = data.keySet().iterator();
+            while(i.hasNext()){
+                Calendar d = i.next();
+                Pacchetto p = this.data.get(d);
+                ris+=p.toString();
+            }
+        }
+        return ris;
+    }
+    
     public static Map<Calendar, Pacchetto> estraiMappa(byte[] dati){
         try {
             Map ris;
@@ -159,7 +161,7 @@ public class DataManager {
             inByte.close();
             return ris;
         } catch (IOException ex) {
-            //Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);
             return new HashMap<>();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DataManager.class.getName()).log(Level.SEVERE, null, ex);    

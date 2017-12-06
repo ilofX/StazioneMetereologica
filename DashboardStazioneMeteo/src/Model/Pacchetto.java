@@ -5,6 +5,7 @@
  */
 package Model;
 
+import java.io.Serializable;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 
@@ -13,7 +14,7 @@ import java.net.InetAddress;
  * @author Filippo Stella
  * @version 0.01
  */
-public class Pacchetto {
+public class Pacchetto implements Serializable{
     
     private final Double precipitazioni,probabilitàPrecipitazioni,umidita,indiceUV,temperatura,velocitaVento,pressione,qualitaAria;
 
@@ -104,6 +105,11 @@ public class Pacchetto {
     }
     public Double getQualitaAria() {
         return qualitaAria;
+    }
+
+    @Override
+    public String toString() {
+        return "Pacchetto{" + "precipitazioni=" + precipitazioni + ", probabilit\u00e0Precipitazioni=" + probabilitàPrecipitazioni + ", umidita=" + umidita + ", indiceUV=" + indiceUV + ", temperatura=" + temperatura + ", velocitaVento=" + velocitaVento + ", pressione=" + pressione + ", qualitaAria=" + qualitaAria + '}';
     }
     
 }

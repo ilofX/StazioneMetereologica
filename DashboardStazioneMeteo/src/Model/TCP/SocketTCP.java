@@ -54,8 +54,9 @@ public class SocketTCP extends Thread{
                 DataOutputStream out = new DataOutputStream(new BufferedOutputStream(this.s.getOutputStream()));
                 out.write("Dati?".getBytes());
                 out.flush();
-                byte[] data = new byte[4096];
+                byte[] data = new byte[10000];
                 in.read(data);
+                System.out.println();
                 Map<Calendar, Pacchetto> map = DataManager.estraiMappa(data);
             synchronized (this.dm){
                 this.dm.setData(map);
