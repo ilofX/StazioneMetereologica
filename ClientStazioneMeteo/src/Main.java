@@ -1,4 +1,6 @@
 
+import Model.Ascoltatore;
+import Model.FinetraClient;
 import Model.Pacchetto;
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -31,12 +33,17 @@ import java.net.SocketException;
 public class Main {
 
     public static void main(String[] args) throws SocketException, IOException {
+        FinetraClient f = new FinetraClient();
+        Ascoltatore a = new Ascoltatore(f);
+        f.setVisible(true);
+        /*
     Pacchetto p= new Pacchetto(2.0, 65.0, 78.0, 45.0, 45.2, 23.5, 26.0, 78.0);
     DatagramSocket clientSocket = new DatagramSocket(); 
     InetAddress IPAddress = InetAddress.getLocalHost();
     p.generaDatagram(IPAddress, 6970);
     DatagramPacket sendPacket = new DatagramPacket(p.generaByteArray(), p.generaByteArray().length, IPAddress, 9876); 
     clientSocket.send(sendPacket);
+*/
     }
     
 }
