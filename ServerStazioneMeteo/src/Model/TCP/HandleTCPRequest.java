@@ -49,10 +49,10 @@ public class HandleTCPRequest implements Runnable{
         try {
             DataInputStream in = new DataInputStream(new BufferedInputStream(this.s.getInputStream()));
             DataOutputStream out = new DataOutputStream(new BufferedOutputStream(this.s.getOutputStream()));
-            byte[] data = new byte[4096];
+            byte[] data = new byte[10000];
             in.read(data);
             String received = new String(data);
-            if(received.equals("Dati?")){
+            if(received.startsWith("Dati?")){
                 byte[] dati = this.dm.generaArrayDati();
                 out.write(dati);
                 out.flush();

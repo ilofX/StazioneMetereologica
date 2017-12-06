@@ -59,7 +59,7 @@ public class ServerUDP extends Thread{
         try {
             this.SocketUDP = new DatagramSocket(this.PORT);
             while(!this.interrupt){
-                byte buf[] = new byte[4096];
+                byte buf[] = new byte[10000];
                 DatagramPacket p = new DatagramPacket(buf, buf.length);
                 this.SocketUDP.receive(p);
                 synchronized(this.clients){
