@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Elia Nasato
+ * @author Filippo Cecconato
  * @version 0.01
  */
 public class Ascoltatore implements ActionListener{
@@ -48,8 +48,7 @@ public class Ascoltatore implements ActionListener{
 
             Pacchetto p=new Pacchetto(Double.parseDouble(f.getVelocita_vento().getValue().toString()), f.getProbabilita_precipitazioni().getValue()+0.0, f.getUmidita().getValue()+0.0, Double.parseDouble(f.getIndiceUV().getValue().toString()), Double.parseDouble(f.getTemperatura().getValue().toString()), Double.parseDouble(f.getVelocita_vento().getValue().toString()), Double.parseDouble(f.getPressione().getValue().toString()), Double.parseDouble(f.getVelocita_vento().getValue().toString()) );
             try {
-                p.generaDatagram(InetAddress.getByName(this.f.getjTextField1().getText()), Integer.parseInt(this.f.getjTextField2().getText()));
-                DatagramPacket sendPacket = new DatagramPacket(p.generaByteArray(), p.generaByteArray().length, InetAddress.getByName(this.f.getjTextField1().getText()), Integer.parseInt(this.f.getjTextField2().getText())); 
+                DatagramPacket sendPacket = p.generaDatagram(InetAddress.getByName(this.f.getjTextField1().getText()), Integer.parseInt(this.f.getjTextField2().getText()));
                 clientSocket.send(sendPacket);
             } catch (IOException ex) {
                 Logger.getLogger(Ascoltatore.class.getName()).log(Level.SEVERE, null, ex);

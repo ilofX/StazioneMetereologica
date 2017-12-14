@@ -20,7 +20,7 @@ import java.net.InetAddress;
 
 /**
  *
- * @author Filippo Stella
+ * @author Filippo Cecconato
  * @version 0.01
  */
 public class Pacchetto {
@@ -52,7 +52,7 @@ public class Pacchetto {
         return pacchetto;
     }
     
-    public byte[] generaByteArray(){
+    public byte[] generaByteArray(){ //GENERA UN ARRAY DI BYTE PER INVIARE CON IL TCP
         byte buf[] = new byte[]  {  this.precipitazioni.byteValue(),
                                     this.probabilitàPrecipitazioni.byteValue(),
                                     this.umidita.byteValue(),
@@ -65,7 +65,7 @@ public class Pacchetto {
         return buf;
     }
     
-    public static Pacchetto pacchettoDaDatagram(DatagramPacket pacchetto){
+    public static Pacchetto pacchettoDaDatagram(DatagramPacket pacchetto){ //GENERE UN OGGETTO PACCHETTO DA UN DATAGRAM PACKET
         byte buf[] = pacchetto.getData();
         Pacchetto p = new Pacchetto(Double.parseDouble(Byte.toString(buf[0])),
                                     Double.parseDouble(Byte.toString(buf[1])),
@@ -78,7 +78,7 @@ public class Pacchetto {
         return p;
     }
     
-    public static Pacchetto pacchettoDaByteArray(byte data[]){
+    public static Pacchetto pacchettoDaByteArray(byte data[]){ //GENERA UN OGGETTO PACCHETTO DA UN ARRAY DI BYTE
         Pacchetto p = new Pacchetto(Double.parseDouble(Byte.toString(data[0])),
                                     Double.parseDouble(Byte.toString(data[1])),
                                     Double.parseDouble(Byte.toString(data[2])),

@@ -25,7 +25,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
- * @author Elia Nasato
+ * @author Filippo Cecconato
  * @version 0.01
  */
 public class Main {

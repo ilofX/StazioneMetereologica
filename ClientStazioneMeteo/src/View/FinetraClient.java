@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author Elia Nasato
+ * @author Filippo Cecconato
  * @version 0.01
  */
 public class FinetraClient extends javax.swing.JFrame {
