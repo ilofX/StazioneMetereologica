@@ -26,6 +26,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -45,13 +46,16 @@ public class Ascoltatore implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==f.getBtnAggiorna()){
-
-            Pacchetto p=new Pacchetto(Double.parseDouble(f.getVelocita_vento().getValue().toString()), f.getProbabilita_precipitazioni().getValue()+0.0, f.getUmidita().getValue()+0.0, Double.parseDouble(f.getIndiceUV().getValue().toString()), Double.parseDouble(f.getTemperatura().getValue().toString()), Double.parseDouble(f.getVelocita_vento().getValue().toString()), Double.parseDouble(f.getPressione().getValue().toString()), Double.parseDouble(f.getVelocita_vento().getValue().toString()) );
-            try {
-                DatagramPacket sendPacket = p.generaDatagram(InetAddress.getByName(this.f.getjTextField1().getText()), Integer.parseInt(this.f.getjTextField2().getText()));
-                clientSocket.send(sendPacket);
-            } catch (IOException ex) {
-                Logger.getLogger(Ascoltatore.class.getName()).log(Level.SEVERE, null, ex);
+            if(!f.getjTextField1().getText().equals("") && !f.getjTextField2().getText().equals("")){
+                Pacchetto p=new Pacchetto(Double.parseDouble(f.getVelocita_vento().getValue().toString()), f.getProbabilita_precipitazioni().getValue()+0.0, f.getUmidita().getValue()+0.0, Double.parseDouble(f.getIndiceUV().getValue().toString()), Double.parseDouble(f.getTemperatura().getValue().toString()), Double.parseDouble(f.getVelocita_vento().getValue().toString()), Double.parseDouble(f.getPressione().getValue().toString()), Double.parseDouble(f.getVelocita_vento().getValue().toString()) );
+                try {
+                    DatagramPacket sendPacket = p.generaDatagram(InetAddress.getByName(this.f.getjTextField1().getText()), Integer.parseInt(this.f.getjTextField2().getText()));
+                    clientSocket.send(sendPacket);
+                } catch (IOException ex) {
+                    Logger.getLogger(Ascoltatore.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                JOptionPane.showMessageDialog(f, "Compilare i campi IP e PORTA", "AVVISO", JOptionPane.WARNING_MESSAGE);
             }
         }
         
